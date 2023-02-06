@@ -39,7 +39,7 @@ const joiValidateProfile = () => celebrate({
 const joiValidateId = () => celebrate({
   // валидируем параметры
   params: Joi.object().keys({
-    _id: joiId(),
+    id: joiId(),
   }),
 });
 

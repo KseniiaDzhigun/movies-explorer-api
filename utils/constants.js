@@ -1,6 +1,6 @@
 const BAD_REQUEST_MESSAGE = 'Передан невалидный id';
 const NOT_FOUND_MESSAGE_USER = 'Пользователь не найден';
-const NOT_FOUND_MESSAGE_CARD = 'Карточка не найдена';
+const NOT_FOUND_MESSAGE_MOVIE = 'Фильм не найден';
 const NOT_FOUND_MESSAGE_PATH = 'Путь не найден';
 const INTERNAL_SERVER_ERROR = 500;
 const INTERNAL_SERVER_ERROR_MESSAGE = 'Произошла ошибка';
@@ -23,7 +23,7 @@ const REGEX_URL = /^https?:\/\/(www.)?[\w-.~:/?#[\]@!$&'()*+,;=]+\.[a-zA-z]+(\/[
 module.exports = {
   BAD_REQUEST_MESSAGE,
   NOT_FOUND_MESSAGE_USER,
-  NOT_FOUND_MESSAGE_CARD,
+  NOT_FOUND_MESSAGE_MOVIE,
   NOT_FOUND_MESSAGE_PATH,
   INTERNAL_SERVER_ERROR,
   INTERNAL_SERVER_ERROR_MESSAGE,
