@@ -13,11 +13,15 @@ const { NOT_FOUND_MESSAGE_PATH } = require('./utils/constants');
 const NotFoundError = require('./errors/not-found-err');
 const err = require('./middlewares/err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const limiter = require('./middlewares/rate-limiter');
 
 const app = express();
 
-// Устанавливаем различные HTTP headers, связанные с безопасностью.
+// Устанавливаем различные HTTP headers, связанные с безопасностью
 app.use(helmet());
+
+// Мидлвэр для защиты от множества автоматических запросов
+app.use(limiter);
 
 // Объект req будет обогащаться cookies
 app.use(cookieParser());
@@ -26,14 +30,14 @@ app.use(cors({ origin: ['http://localhost:3001', 'https://dzhigun.students.nomor
 // It parses incoming JSON requests and puts the parsed data in req.body
 app.use(express.json());
 
-// подключаем логгер запросов
+// Подключаем логгер запросов
 app.use(requestLogger);
 
-// за ним идут все обработчики роутов
+// Обработчики роутов
 app.use('/', router);
 app.use('*', (req, res, next) => next(new NotFoundError(NOT_FOUND_MESSAGE_PATH)));
 
-// подключаем логгер ошибок
+// Подключаем логгер ошибок
 app.use(errorLogger);
 
 // Обработчик ошибок celebrate
