@@ -5,11 +5,11 @@ const NOT_FOUND_MESSAGE_PATH = 'Путь не найден';
 const INTERNAL_SERVER_ERROR = 500;
 const INTERNAL_SERVER_ERROR_MESSAGE = 'Произошла ошибка';
 const OK = 200;
-const OK_MESSAGE = 'Пост удалён';
+const OK_MESSAGE = 'Фильм удалён';
 const CREATED = 201;
 const UNAUTHORIZED_MESSAGE_LOGIN = 'Неправильные почта или пароль';
 const UNAUTHORIZED_MESSAGE_AUTH = 'Необходима авторизация';
-const FORBIDDEN_MESSAGE = 'Вы не можете удалять карточки других пользователей';
+const FORBIDDEN_MESSAGE = 'Вы не можете удалять фильмы других пользователей';
 const CONFLICT_MESSAGE = 'Пользователь с таким email уже существует';
 
 const REGEX_URL = /^https?:\/\/(www.)?[\w-.~:/?#[\]@!$&'()*+,;=]+\.[a-zA-z]+(\/[\w-.~:/?#[\]@!$&'()*+,;=]+)*#?$/;

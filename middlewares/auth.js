@@ -19,6 +19,7 @@ module.exports = (req, res, next) => {
     // Метод jwt.verify вернёт пейлоуд токена (объект с id), если тот прошёл проверку.
     payload = jwt.verify(
       token,
+      // в режиме разработки код запускается и работает и без .env файла.
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
     );
   } catch (err) {
