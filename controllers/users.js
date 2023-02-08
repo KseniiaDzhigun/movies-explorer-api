@@ -93,12 +93,10 @@ const login = async (req, res, next) => {
     // Записываем JWT в httpOnly куку
     return res
       .cookie('jwt', token, {
-        // token - наш JWT токен, который мы отправляем
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
         sameSite: true,
       })
-      // .send({ message: 'Токен записан' });
       .status(OK).json({
         name: user.name,
         email: user.email,

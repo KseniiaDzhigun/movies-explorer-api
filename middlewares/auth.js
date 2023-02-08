@@ -1,4 +1,5 @@
 // Миддлвэр для защиты авторизацией всех маршрутов, кроме страницы регистрации и логина
+
 const jwt = require('jsonwebtoken');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -25,7 +26,10 @@ module.exports = (req, res, next) => {
   } catch (err) {
     return next(new UnauthorizedError(UNAUTHORIZED_MESSAGE_AUTH));
   }
-  req.user = payload; // записываем пейлоуд в объект запроса, в нашем случае id
 
-  return next(); // пропускаем запрос дальше
+  // записываем пейлоуд в объект запроса
+  req.user = payload;
+
+  // пропускаем запрос дальше
+  return next();
 };

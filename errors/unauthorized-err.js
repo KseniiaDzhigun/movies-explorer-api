@@ -1,3 +1,5 @@
+// Конструктор наследует от стандартной ошибки и выставляет свойство statusCode
+
 class UnauthorizedError extends Error {
   constructor(message) {
     super(message);

@@ -25,19 +25,19 @@ app.use(limiter);
 
 // Объект req будет обогащаться cookies
 app.use(cookieParser());
-app.use(cors({ origin: ['http://localhost:3001', 'https://dzhigun.students.nomoredomains.rocks'], credentials: true, maxAge: 60 }));
+app.use(cors({ origin: ['http://localhost:3000', 'https://dzhigun.movies.nomoredomainsclub.ru'], credentials: true, maxAge: 60 }));
 
 // It parses incoming JSON requests and puts the parsed data in req.body
 app.use(express.json());
 
-// Подключаем логгер запросов
+// Логгер запросов
 app.use(requestLogger);
 
 // Обработчики роутов
 app.use('/', router);
 app.use('*', (req, res, next) => next(new NotFoundError(NOT_FOUND_MESSAGE_PATH)));
 
-// Подключаем логгер ошибок
+// Логгер ошибок
 app.use(errorLogger);
 
 // Обработчик ошибок celebrate

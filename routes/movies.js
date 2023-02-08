@@ -5,10 +5,10 @@ const {
 } = require('../controllers/movies');
 const { joiValidateId, joiValidateMovie } = require('../utils/joi-validators');
 
-// Возвращает все сохранённые текущим  пользователем фильмы
+// Возвращает все сохранённые текущим пользователем фильмы
 router.get('/', getMovies);
 
-// Тела, параметры запросов к серверу должны валидироваться до передачи обработки в контроллеры
+// Тела, параметры запросов к серверу должны валидироваться до передачи обработки в контроллеры, Joi
 
 // Создаёт фильм с переданными в теле country, director,
 // duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId

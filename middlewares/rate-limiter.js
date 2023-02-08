@@ -1,3 +1,5 @@
+// Защита от множества автоматических запросов - brute force, DDoS
+
 const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
