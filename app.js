@@ -20,9 +20,6 @@ const app = express();
 // Устанавливаем различные HTTP headers, связанные с безопасностью
 app.use(helmet());
 
-// Мидлвэр для защиты от множества автоматических запросов
-app.use(limiter);
-
 // Объект req будет обогащаться cookies
 app.use(cookieParser());
 app.use(cors({ origin: ['http://localhost:3000', 'https://dzhigun.movies.nomoredomainsclub.ru'], credentials: true, maxAge: 60 }));
@@ -32,6 +29,9 @@ app.use(express.json());
 
 // Логгер запросов
 app.use(requestLogger);
+
+// Мидлвэр для защиты от множества автоматических запросов
+app.use(limiter);
 
 // Обработчики роутов
 app.use('/', router);

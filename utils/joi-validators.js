@@ -53,7 +53,7 @@ const joiValidateMovie = () => celebrate({
     image: joiLink(),
     trailerLink: joiLink(),
     thumbnail: joiLink(),
-    movieId: joiId(),
+    movieId: joiNumber(),
     nameRU: joiText(),
     nameEN: joiText(),
   }),

@@ -14,7 +14,8 @@ const {
 
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({}).populate('owner');
+    // Получаем только те карточки которые принадлежат пользователю
+    const movies = await Movie.find({ owner: req.user._id }).populate('owner');
     return res.status(OK).json(movies);
   } catch (e) {
     return next(e);
