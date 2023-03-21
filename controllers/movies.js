@@ -48,7 +48,7 @@ const deleteMovieById = async (req, res, next) => {
 const createMovie = async (req, res, next) => {
   try {
     const movieOwner = await User.findById(req.user._id);
-    const movie = await Movie.create({ owner: movieOwner, ...req.body });
+    const movie = await Movie.create({ owner: movieOwner, saved: req.user._id, ...req.body });
     return res.status(CREATED).json(movie);
   } catch (e) {
     if (e.name === 'ValidationError') {

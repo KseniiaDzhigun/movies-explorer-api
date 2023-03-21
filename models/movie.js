@@ -49,10 +49,20 @@ const movieSchema = mongoose.Schema({
     },
   },
   // Настраиваем связь двух схем movie и user
+  // _id пользователя, который сохранил фильм.
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
+  },
+  saved: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+      },
+    ],
+    default: [],
   },
   movieId: {
     type: Number,

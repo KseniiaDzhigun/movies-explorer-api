@@ -11,7 +11,7 @@ router.post('/signup', joiValidateUser(), createUser);
 
 // Роут signout, который очищает куки
 router.get('/signout', (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Выход' });
+  res.clearCookie('jwt').send({ message: 'Вы успешно вышли из аккаунта' });
 });
 
 // Защищаем авторизацией все маршруты, кроме страницы регистрации и логина
