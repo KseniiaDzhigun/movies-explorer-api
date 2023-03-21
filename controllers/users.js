@@ -26,6 +26,8 @@ const getCurrentUser = async (req, res, next) => {
   }
 };
 
+// При успешной регистрации возвращаем куки
+// чтобы пользователь сразу смог пользоваться сайтом (без логина)
 const createUser = async (req, res, next) => {
   try {
     const {
@@ -35,11 +37,23 @@ const createUser = async (req, res, next) => {
     const user = await User.create({
       name, email, password: hash,
     });
-    return res.status(CREATED).json({
-      name: user.name,
-      email: user.email,
-      _id: user.id,
-    });
+    // Методу sign передаем 3 аргумента: пейлоуд, секретный ключ подписи, время действия токена
+    const token = jwt.sign(
+      { _id: user.id },
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      { expiresIn: '7d' },
+    );
+    return res
+      .cookie('jwt', token, {
+        maxAge: 3600000 * 24 * 7,
+        httpOnly: true,
+        sameSite: true,
+      })
+      .status(CREATED).json({
+        name: user.name,
+        email: user.email,
+        _id: user.id,
+      });
   } catch (e) {
     if (e.code === 11000) {
       return next(new ConflictError(CONFLICT_MESSAGE));
