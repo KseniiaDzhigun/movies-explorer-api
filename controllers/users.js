@@ -63,6 +63,9 @@ const updateUser = async (req, res, next) => {
 
     return res.status(OK).json(user);
   } catch (e) {
+    if (e.code === 11000) {
+      return next(new ConflictError(CONFLICT_MESSAGE));
+    }
     if (e.name === 'ValidationError') {
       const errors = Object.values(e.errors).map((err) => err.message);
       return next(new BadRequestError(errors.join(', ')));
