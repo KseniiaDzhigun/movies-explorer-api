@@ -14,7 +14,7 @@ const {
 
 const getMovies = async (req, res, next) => {
   try {
-    // Получаем только те карточки которые принадлежат пользователю
+    // only retrieve those cards belonging to the user
     const movies = await Movie.find({ owner: req.user._id }).populate('owner');
     return res.status(OK).json(movies);
   } catch (e) {
@@ -29,7 +29,7 @@ const deleteMovieById = async (req, res, next) => {
     const movie = await Movie.findById(id)
       .orFail(new NotFoundError(NOT_FOUND_MESSAGE_MOVIE));
 
-    // У пользователя не должно быть возможности удалять фильмы других пользователей
+    // User should not be able to delete other users' films
     if (req.user._id !== String(movie.owner._id)) {
       return next(new ForbiddenError(FORBIDDEN_MESSAGE));
     }

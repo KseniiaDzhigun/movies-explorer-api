@@ -25,7 +25,6 @@ const movieSchema = mongoose.Schema({
   image: {
     type: String,
     required: true,
-    // Используем метод isURL модуля Validator
     validate: {
       validator: (image) => validator.isURL(image),
       message: (props) => `${props.value} не валидная ссылка!`,
@@ -39,7 +38,6 @@ const movieSchema = mongoose.Schema({
       message: (props) => `${props.value} не валидная ссылка!`,
     },
   },
-  // миниатюрное изображение постера к фильму
   thumbnail: {
     type: String,
     required: true,
@@ -48,8 +46,6 @@ const movieSchema = mongoose.Schema({
       message: (props) => `${props.value} не валидная ссылка!`,
     },
   },
-  // Настраиваем связь двух схем movie и user
-  // _id пользователя, который сохранил фильм.
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',

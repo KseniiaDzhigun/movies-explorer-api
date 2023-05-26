@@ -26,8 +26,8 @@ const getCurrentUser = async (req, res, next) => {
   }
 };
 
-// При успешной регистрации возвращаем куки
-// чтобы пользователь сразу смог пользоваться сайтом (без логина)
+// on successful registration return cookies
+// so that the user can immediately use the website (without a login)
 const createUser = async (req, res, next) => {
   try {
     const {
@@ -37,7 +37,7 @@ const createUser = async (req, res, next) => {
     const user = await User.create({
       name, email, password: hash,
     });
-    // Методу sign передаем 3 аргумента: пейлоуд, секретный ключ подписи, время действия токена
+    // Pass 3 arguments to the sign method: payload, signature secret key, token validity time
     const token = jwt.sign(
       { _id: user.id },
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
@@ -70,8 +70,8 @@ const updateUser = async (req, res, next) => {
   try {
     const { name, email } = req.body;
     const user = await User.findByIdAndUpdate(req.user._id, { name, email }, {
-      new: true, // обработчик then получит на вход обновлённую запись
-      runValidators: true, // данные будут валидированы перед изменением
+      new: true, // then handler will receive the updated record as input
+      runValidators: true, // data will be validated before changing
     })
       .orFail(new NotFoundError(NOT_FOUND_MESSAGE_USER));
 
@@ -93,7 +93,7 @@ const login = async (req, res, next) => {
     const {
       email, password,
     } = req.body;
-    // Здесь в объекте user будет хеш пароля
+
     const user = await User.findOne({ email }).select('+password')
       .orFail(new UnauthorizedError(UNAUTHORIZED_MESSAGE_LOGIN));
 
@@ -101,13 +101,13 @@ const login = async (req, res, next) => {
     if (!matched) {
       return next(new UnauthorizedError(UNAUTHORIZED_MESSAGE_LOGIN));
     }
-    // Методу sign передаем 3 аргумента: пейлоуд, секретный ключ подписи, время действия токена
+
     const token = jwt.sign(
       { _id: user._id },
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
       { expiresIn: '7d' },
     );
-    // Записываем JWT в httpOnly куку
+    // Write JWT in httpOnly Cookies
     return res
       .cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,

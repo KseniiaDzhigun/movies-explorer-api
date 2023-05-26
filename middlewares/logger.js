@@ -1,5 +1,3 @@
-// Логируем два типа информации — запросы к серверу и ошибки, которые на нём происходят.
-
 const winston = require('winston');
 const expressWinston = require('express-winston');
 

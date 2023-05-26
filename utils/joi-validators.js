@@ -1,10 +1,9 @@
 const { celebrate, Joi } = require('celebrate');
 const { REGEX_URL } = require('./constants');
 
-// Id необходимо валидировать как hex последовательность длиной 24 символа (0-9, A-F)
+// Id must be validated as a hex sequence of 24 characters (0-9, A-F)
 const joiId = () => Joi.string().length(24).hex().required();
 
-// Ссылки валидируем регулярным выражением
 const joiLink = () => Joi.string().required().pattern(REGEX_URL);
 
 const joiLimitedText = () => Joi.string().required().min(2).max(30);
@@ -37,7 +36,6 @@ const joiValidateProfile = () => celebrate({
 });
 
 const joiValidateId = () => celebrate({
-  // валидируем параметры
   params: Joi.object().keys({
     id: joiId(),
   }),
